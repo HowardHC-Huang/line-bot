@@ -18,8 +18,8 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('token')
-handler = WebhookHandler('secret') #secret
+line_bot_api = LineBotApi('Q3eo2dA3tXvwQmpzf5jTAYctPp/Vrt5dAWDw+wj8al5JYjTTCVORjIH3jFWb+i0oJK9zdOiafmyMTm+uao+2pLr+meMEj0R+sIaGv6XjMCEwpfSnWQl3XB9ad+bqJYqeJA9mFZ4KT1aLa4uTLuJ2+AdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('da7255e8fc5e0f5d19c0d111bc48c999') #secret
 
 
 @app.route("/callback", methods=['POST'])    #www.line-bot.com"/callback"有人來這個路徑(callboack結尾)敲門的話,就會執行這個觸發事件
