@@ -46,25 +46,7 @@ def handle_message(event):
     msg = event.message.text    #####示範改:使用者tx的訊息,把存成msg
     reply = '很抱歉, 您說什麼'
 
-    ##### 開始改  ############
-    if msg in ['hi', 'Hi']:    ####用"=="要完全一樣的hi,改用in清單
-        reply = '嗨~'
-    elif msg == '你吃飯了嗎':
-        reply = '還沒'
-    elif msg == '你是誰':
-        reply = '我是機器人,我不用打疫苗咧~~~'
-    elif '疫苗' in msg:
-        reply = '你想打疫苗，是嗎?'
-    ##### 結束 ########
-
-    line_bot_api.reply_message(    #回覆訊息
-        event.reply_token,
-        TextSendMessage(text=reply))    #####示範改:機器回的訊息:改成reply;這行才是真正回覆訊息的
-
-
-
-
-    #####貼圖寫成另個if####
+    #####回覆貼圖寫成另個if####
     if '給我貼圖' in msg:
         sticker_message = StickerSendMessage(    #line_sdk範例程式碼
             package_id='1',    #貼圖對應什麼代號,這部分要google
@@ -86,7 +68,23 @@ def handle_message(event):
      #你的伺服器把那個錯誤訊息傳過來~)
     #會發現"StickerSendMessage is not defined"原因是忘記import!!找到原因了!
 
-    
+
+
+
+    ##### 開始改1  ############
+    if msg in ['hi', 'Hi']:    ####用"=="要完全一樣的hi,改用in清單
+        reply = '嗨~'
+    elif msg == '你吃飯了嗎':
+        reply = '還沒'
+    elif msg == '你是誰':
+        reply = '我是機器人,我不用打疫苗咧~~~'
+    elif '疫苗' in msg:
+        reply = '你想打疫苗，是嗎?'
+    ##### 結束 ########
+
+    line_bot_api.reply_message(    #回覆訊息
+        event.reply_token,
+        TextSendMessage(text=reply))    #####示範改:機器回的訊息:改成reply;這行才是真正回覆訊息的
 
 
 if __name__ == "__main__": #寫這行是為:程式"被執行"才執行,而不是"被import"就執行,否則才剛寫random,電腦就在產生亂數,CPU就跑很高,這樣不好
