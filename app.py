@@ -43,9 +43,19 @@ def callback():    #返回的觸發事件    #所以我們要在MessagingAPI裡�
 
 @handler.add(MessageEvent, message=TextMessage)    #上面那個func會觸發這個handleFunction,顧名思義就是在處理訊息,使用者傳來的訊息有某某某,然後我們就做什麼動作
 def handle_message(event):
+    msg = event.message.text    #####示範改:使用者tx的訊息,把存成msg
+    reply = '很抱歉, 您說什麼'
+
+    #####開始改  ############
+    if msg == 'hi':
+        reply == 'Hi~'
+    elif msg == '你吃飯了嗎':
+        reply == '還沒'
+    ####結束####
+
     line_bot_api.reply_message(    #回覆訊息
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        TextSendMessage(text=reply))    #####示範改:機器回的訊息:改成reply
 
 
 if __name__ == "__main__": #寫這行是為:程式"被執行"才執行,而不是"被import"就執行,否則才剛寫random,電腦就在產生亂數,CPU就跑很高,這樣不好
