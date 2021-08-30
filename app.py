@@ -48,9 +48,9 @@ def handle_message(event):
 
     #####開始改  ############
     if msg == 'hi':
-        reply == 'Hi~'
+        reply = 'Hi~'
     elif msg == '你吃飯了嗎':
-        reply == '還沒'
+        reply = '還沒'
     ####結束####
 
     line_bot_api.reply_message(    #回覆訊息
