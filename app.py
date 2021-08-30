@@ -46,12 +46,16 @@ def handle_message(event):
     msg = event.message.text    #####示範改:使用者tx的訊息,把存成msg
     reply = '很抱歉, 您說什麼'
 
-    #####開始改  ############
-    if msg == 'hi':
-        reply = 'Hi~'
+    ##### 開始改  ############
+    if msg in ['hi', 'Hi']:    ####用"=="要完全一樣的hi,改用in清單
+        reply = '嗨~'
     elif msg == '你吃飯了嗎':
         reply = '還沒'
-    ####結束####
+    elif msg == '你是誰':
+        reply = '我是機器人,我不用打疫苗咧~~~'
+    elif '疫苗' in msg:
+        reply = '你想打疫苗，是嗎?'
+    ##### 結束 ########
 
     line_bot_api.reply_message(    #回覆訊息
         event.reply_token,
