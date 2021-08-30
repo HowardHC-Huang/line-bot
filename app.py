@@ -13,7 +13,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, StickerSendMessage  #傳貼圖要import"StickerSendMessage"
 )
 
 app = Flask(__name__)
@@ -59,7 +59,34 @@ def handle_message(event):
 
     line_bot_api.reply_message(    #回覆訊息
         event.reply_token,
-        TextSendMessage(text=reply))    #####示範改:機器回的訊息:改成reply
+        TextSendMessage(text=reply))    #####示範改:機器回的訊息:改成reply;這行才是真正回覆訊息的
+
+
+
+
+    #####貼圖寫成另個if####
+    if '給我貼圖' in msg:
+        sticker_message = StickerSendMessage(    #line_sdk範例程式碼
+            package_id='1',    #貼圖對應什麼代號,這部分要google
+            sticker_id='1'
+        )
+    
+    line_bot_api.reply_message(    #回覆訊息
+        event.reply_token,
+        sticker_message)    #####示範改:機器回的訊息:改成回覆貼圖
+
+    return    #return掉就是這個func就結束了.return是回傳,我們可以return"不寫東西喔"
+                  #結果就是"不return東西的return";但是func只要一遇到return,就會自動結束掉.
+                  #重要!!!造成我們寫這個return,只是為了讓這個func結束掉
+    #####結束######
+
+    #這時回傳貼圖還是失敗,我們要看log了(讀錯誤訊息)
+    #cmd打 heroku logs(因為這時候錯誤訊息是"在雲端的",因為這些程式碼在運行,是在heroku的電腦運行的
+     #不然錯誤訊息應該是在我的CMD的麻,但現在根本不再local執行,所以要打heroku logs→才可以跟heroku說
+     #你的伺服器把那個錯誤訊息傳過來~)
+    #會發現"StickerSendMessage is not defined"原因是忘記import!!找到原因了!
+
+    
 
 
 if __name__ == "__main__": #寫這行是為:程式"被執行"才執行,而不是"被import"就執行,否則才剛寫random,電腦就在產生亂數,CPU就跑很高,這樣不好
